@@ -55,17 +55,16 @@ def auto_regex(my_str,regexs):
     """
 
     """
-    for i,regex in enumerate(regexs):
-        matches = re.finditer(regex, my_str, re.MULTILINE)
+    for i,item in enumerate(regexs):
+        matches = re.finditer(item['regex'], my_str, re.MULTILINE)
         for matchNum, match in enumerate(matches, start=1):
-
             yield {
                 "matchNum":matchNum,
                 "start" :match.start(),
                 "end" :match.end(),
                 "match":match.group(),
                 "data":match,
-                "regex":regex,
+                "regex":item['regex'],
                 "regex_index":i
             }
 def test_auto_regex():
@@ -119,6 +118,8 @@ def test_auto_regex_replace():
 def regex_plus(text,regexs=None,do="replace",test=False):
     """ 自动进行
 
+    do replace match
+
 
     """
     # if key is None:
@@ -144,7 +145,10 @@ def regex_plus(text,regexs=None,do="replace",test=False):
 
     # print(auto_regex_replace(my_str,regexs))
     print("new_regexs",new_regexs)
-    return auto_regex_replace(text,new_regexs)
+    if do=="replace":
+        return auto_regex_replace(text,new_regexs)
+    else:
+        return auto_regex(text,new_regexs)
 
 if __name__ == "__main__":
     # test_auto_regex()
@@ -161,7 +165,10 @@ if __name__ == "__main__":
         }
     ]
     text="Here is our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
-
-    out=regex_plus(text,regexs=regexs,test=True)
+    print("replace:")
+    out=regex_plus(text,regexs=regexs,test=True,do="replace")
     print(out)
+    print("match:")
+    for it in regex_plus(text,regexs=regexs,test=True,do="match"):
+        print(it)
 
