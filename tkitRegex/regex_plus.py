@@ -3,7 +3,10 @@
 import re
 import sys
 # from type import List
-
+try:
+    from .regex_dict import REGEX_DICT
+except ImportError:
+    from regex_dict import REGEX_DICT
 
 def auto_test_regex(regexs,my_str):
     """
@@ -93,8 +96,9 @@ def auto_regex_replace(my_str,regexs)->str:
 
 
     for i,item in enumerate(regexs):
+        # print(item)
         my_str = re.sub(item['regex'], item['replace'], my_str)
-        return my_str
+    return my_str
 def test_auto_regex_replace():
     """Test that auto-regex_replace() works correctly
 
@@ -111,8 +115,53 @@ def test_auto_regex_replace():
 
     ]
     print(auto_regex_replace(my_str,regexs))
-if __name__ == "__main__":
-    test_auto_regex()
 
-    test_auto_regex_replace()
+def regex_plus(text,regexs=None,do="replace",test=False):
+    """ 自动进行
+
+
+    """
+    # if key is None:
+    assert regexs # "regexs must not be None
+
+    new_regexs = []
+    for item in regexs:
+        if item.get("regex"):
+            one ={
+                "regex_key":item.get("regex_key"),
+                "regex":item.get("regex"),
+                "replace":item.get("replace")
+                }
+        else:
+            key=item.get("regex_key")
+            one ={
+                "regex_key":item.get("regex_key"),
+                "regex":REGEX_DICT[key]['regex'],
+                "replace":item.get("replace")
+                }
+        new_regexs.append(one)
+
+
+    # print(auto_regex_replace(my_str,regexs))
+    print("new_regexs",new_regexs)
+    return auto_regex_replace(text,new_regexs)
+
+if __name__ == "__main__":
+    # test_auto_regex()
+
+    # test_auto_regex_replace()
+    regexs=[
+        {
+            "regex_key":'follow_characters',
+            "replace":''
+        },
+        {
+            "regex_key":'email',
+            "replace":'your_email_address'
+        }
+    ]
+    text="Here is our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+
+    out=regex_plus(text,regexs=regexs,test=True)
+    print(out)
 
