@@ -57,7 +57,7 @@ setup(
     long_description_content_type="text/markdown",
     # 依赖文件
     install_requires=[
-        # 'tqdm>=4.64.0',
+        'pregex>=2.1.0',
         # 'sentence-splitter>=1.4',
         # 'requests>=2.28.1',
         # 'nltk>=3.7'

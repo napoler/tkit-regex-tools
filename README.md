@@ -32,3 +32,14 @@ for it in regex_plus(text,regexs=regexs,test=True,do="match"):
 
 
 ```
+
+示例使用：
+https://github.com/napoler/tkit-regex-tools/blob/main/test.ipynb
+
+
+
+推荐文档
+
+https://github.com/manoss96/pregex
+https://github.com/napoler/pregex
+https://pregex.rtfd.io/
