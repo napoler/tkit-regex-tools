@@ -50,13 +50,44 @@ REGEX_DICT['email_domain'] = {
 
 
 
+
+
+cnn_mail=px.Word()+"@cnn.com"
+pre:px.Pregex=cnn_mail
+# pre:px.Pregex="Follow us on "+px.Word()+twitter+" and "+ twitter
+# pre
+text="Here is our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter abc@cnn.com and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+# pre.get_matches(text)
+cnn_mail=pre.get_pattern()
+
+REGEX_DICT['cnn_mail'] = {
+    # "regex":r'Follow us on (.*?) @(.*?) and @(.*?).\.',
+    "regex":cnn_mail,
+    "type":"replace",
+    "description":"""
+        过滤cnn邮箱
+
+        """,
+    "demo":"sss",
+    "test":{
+        "text":"Here is our guide on how to give CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+        },
+    "status": True
+    }
+
+
+
+
+
+
+
 # follow_characters 生成
 twitter=" @"+px.Word()
 pre:px.Pregex="Follow us on "+px.Word()+twitter +" and"+twitter+"."
 # pre:px.Pregex="Follow us on "+px.Word()+twitter+" and "+ twitter
 # pre
 text="Here is our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
-pre.get_matches(text)
+# pre.get_matches(text)
 follow_characters=pre.get_pattern()
 
 REGEX_DICT['follow_characters'] = {

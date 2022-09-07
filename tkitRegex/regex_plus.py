@@ -144,7 +144,7 @@ def regex_plus(text,regexs=None,do="replace",test=False):
 
 
     # print(auto_regex_replace(my_str,regexs))
-    print("new_regexs",new_regexs)
+    # print("new_regexs",new_regexs)
     if do=="replace":
         return auto_regex_replace(text,new_regexs)
     else:
@@ -159,12 +159,17 @@ if __name__ == "__main__":
             "regex_key":'follow_characters',
             "replace":''
         },
+        # {
+        #     "regex_key":'email',
+        #     "replace":'your_email_address'
+        # },
         {
-            "regex_key":'email',
-            "replace":'your_email_address'
+            "regex_key":'cnn_mail',
+            "replace":'mail'
         }
+
     ]
-    text="Here is our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+    text="Here is abc@cnn.com our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
     print("replace:")
     out=regex_plus(text,regexs=regexs,test=True,do="replace")
     print(out)
