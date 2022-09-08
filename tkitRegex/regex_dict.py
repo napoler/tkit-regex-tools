@@ -48,8 +48,30 @@ REGEX_DICT['email_domain'] = {
     "status":False
     }
 
+tld = '.' + px.op.Either('com', 'org')
+cnn=px.qu.Optional('www.')+px.op.Either('cnn', 'CNN', 'Cnn')+tld
 
+pre:px.Pregex=cnn
+# pre:px.Pregex="Follow us on "+px.Word()+twitter+" and "+ twitter
+# pre
+text="Here is our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter abc@cnn.com and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+# pre.get_matches(text)
+cnn=pre.get_pattern()
 
+REGEX_DICT['cnn'] = {
+    # "regex":r'Follow us on (.*?) @(.*?) and @(.*?).\.',
+    "regex":cnn,
+    "type":"replace",
+    "description":"""
+        过滤cnn网址
+
+        """,
+    "demo":"sss",
+    "test":{
+        "text":"Here is our guide on how to give CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+        },
+    "status": True
+    }
 
 
 cnn_mail=px.Word()+"@cnn.com"
@@ -83,7 +105,7 @@ REGEX_DICT['cnn_mail'] = {
 
 # follow_characters 生成
 twitter=" @"+px.Word()
-pre:px.Pregex="Follow us on "+px.Word()+twitter +" and"+twitter+"."
+pre:px.Pregex="Follow"+px.qu.Optional(px.qu.OneOrMore(" "+px.Word())) +twitter +px.qu.Optional(" and"+twitter) +px.qu.Optional(px.qu.OneOrMore(" "+px.Word()))+px.cl.AnyPunctuation()
 # pre:px.Pregex="Follow us on "+px.Word()+twitter+" and "+ twitter
 # pre
 text="Here is our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
@@ -100,7 +122,7 @@ REGEX_DICT['follow_characters'] = {
         """,
     "demo":"sss",
     "test":{
-        "text":"Here is our guide on how to give CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+        "text":"Other helpful accessories include web harnesses designed to be used with service dog vests. When owners have sight or mobility issues, it is especially important to make sure the dog is always securely leashed. High-Performance Service & Therapy Dog Vest / Cape with Pockets. Use the weekly Newsquiz to test your knowledge of stories you saw on CNN.com. Buy Patch, Diabetic Alert, Service Dog. Read More. Follow us on Twitter @TribeLive. Read more. Buy Patch, Please Don't Pet Me - For Service Dogs. For Service Dogs. Buy Patch, Please Don’t Pet Me - Follow us on Twitter @TributesToThe and @wqwq.  Follow us on Twitter @TributesToThe Crate. Follow our Instagram @TributestoThe Crate. "
         },
     "status": True
     }

@@ -166,10 +166,14 @@ if __name__ == "__main__":
         {
             "regex_key":'cnn_mail',
             "replace":'mail'
-        }
+        },
+        {
+            "regex_key":'cnn',
+            "replace":'website'
+        },
 
     ]
-    text="Here is abc@cnn.com our guide on how to 123@qq.com give 123@qq.com CBD oil to dogs. Follow us on Twitter @TriBeCa and @TriBeCaDog. Follow us on Facebook @TriBeCa and @TriBeCaDog."
+    text="Other helpful accessories include web harnesses designed to be used with service dog vests. When owners have sight or mobility issues, it is especially important to make sure the dog is always securely leashed. High-Performance Service & Therapy Dog Vest / Cape with Pockets. Use the weekly Newsquiz to test your knowledge of stories you saw on CNN.com. Buy Patch, Diabetic Alert, Service Dog. Read More. Follow us on Twitter @TribeLive. Read more. Buy Patch, Please Don't Pet Me - For Service Dogs. For Service Dogs. Buy Patch, Please Don’t Pet Me - Follow us on Twitter @TributesToThe and @wqwq.  Follow us on Twitter @TributesToThe Crate. Follow our Instagram @TributestoThe Crate. "
     print("replace:")
     out=regex_plus(text,regexs=regexs,test=True,do="replace")
     print(out)
